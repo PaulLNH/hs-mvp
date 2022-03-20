@@ -1,0 +1,156 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Handy Schedule",
+    "version": "1.0",
+    "contact": {
+      "name": "Handy Schedule",
+      "url": "https://handyschedule.com/contact"
+    },
+    "description": "Handy Schedule is a booking application for traveling professionals."
+  },
+  "tags": [
+    {
+      "name": "User",
+      "description": "Users Endpoints"
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://handyschedule.com/api/v1",
+      "description": "Handy Schedule Live Server"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Get a list of all users.",
+        "operationId": "get-users",
+        "description": "Returns a list of all users.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Authorization",
+            "description": "Valid Bearer token to be passed with the request.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/get-users"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - This request requires authentication and none was provided."
+          },
+          "403": {
+            "description": "Forbidden - The authentication credentials do not have access to this resource."
+          },
+          "404": {
+            "description": "Not Found - The server was unable to find a resource matching this request."
+          },
+          "429": {
+            "description": "Too Many Requests - The client has sent too many requests within the given time."
+          },
+          "500": {
+            "description": "Internal Server Error - There was an unexpected error with the server",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error-Response"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerToken": []
+          }
+        ]
+      },
+      "parameters": []
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error-Response": {
+        "title": "Error-Response",
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Standardized reason phrase for this status code",
+            "example": "Error Name"
+          },
+          "message": {
+            "type": "string",
+            "description": "Details about the error",
+            "example": "Error Description"
+          }
+        }
+      },
+      "get-users": {
+        "type": "object",
+        "required": ["placeholder"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "Integer"
+          },
+          "public_id": {
+            "type": "string",
+            "example": "UUID"
+          },
+          "email": {
+            "type": "string",
+            "example": "String"
+          },
+          "email_verified": {
+            "type": "boolean"
+          },
+          "email_opt_in": {
+            "type": "boolean"
+          },
+          "phone": {
+            "type": "string",
+            "example": "String"
+          },
+          "given_name": {
+            "type": "string",
+            "example": "String"
+          },
+          "family_name": {
+            "type": "string",
+            "example": "String"
+          },
+          "password": {
+            "type": "string",
+            "example": "String"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "String"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerToken": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
