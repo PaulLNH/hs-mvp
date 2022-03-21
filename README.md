@@ -77,6 +77,10 @@ User adds Tasks to an Appointment
 
 ## Endpoints
 
+### Authentication
+
+POST /auth
+
 ### Users
 
 POST /users
