@@ -1,0 +1,7 @@
+{
+  "NotFound": {
+    "code": "404",
+    "name": "Not Found",
+    "message": "The server was unable to find a resource matching this request."
+  }
+}
