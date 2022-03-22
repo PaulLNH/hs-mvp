@@ -2,13 +2,17 @@ const { User } = require("../models");
 const { http } = require("../constants");
 
 const users = {
-  getAllUsers: (req, res) => {
-    res.json({ firstName: "Paul", lastName: "Laird", location: "Portsmouth" });
+  getAllUsers: async (req, res) => {
+    const users = await User.findAll({
+      attributes: { exclude: ["password"] },
+      raw: true,
+    });
+    const response = users.map((user) => ({ ...user, location: "Portsmouth" }));
+    res.json(response);
   },
   getUserInfo: async (req, res) => {
     try {
       const { id } = req.user;
-      console.log("id: ", id);
       let response = {};
       const user = await User.findOne({
         where: { id },

@@ -79,7 +79,8 @@ User adds Tasks to an Appointment
 
 ### Authentication
 
-POST /auth
+POST /auth/signup
+POST /auth/signin
 
 ### Users
 
