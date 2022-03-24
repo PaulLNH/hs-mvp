@@ -1,7 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-router.use("/users", require("./users"));
-router.use("/auth", require("./auth"));
+router.get("/", function (req, res, next) {
+  res.render("index");
+});
+
+router.use("/api", require("./api"));
 
 module.exports = router;
