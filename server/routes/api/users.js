@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { users } = require("../controllers");
-const { auth } = require("../middleware");
+const { users } = require("../../controllers");
+const { auth } = require("../../middleware");
 
 /**
  * @desc Returns all users
