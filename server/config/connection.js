@@ -18,6 +18,6 @@ if (!options) {
   throw new Error("Error parsing database connection string.");
 }
 
-const sequelize = new Sequelize(DATABASE_URL || LOCALDATABASE_URL);
+const sequelize = new Sequelize(DATABASE_URL || LOCALDATABASE_URL, options);
 
 module.exports = sequelize;
