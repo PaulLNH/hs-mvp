@@ -10,6 +10,20 @@ const users = {
     const response = users.map((user) => ({ ...user, location: "Portsmouth" }));
     res.json(response);
   },
+  createUser: async (req, res) => {
+    const { email, password, first_name, last_name } = req.body;
+    const user = await User.create(
+      {
+        first_name,
+        last_name,
+        email,
+        password,
+      },
+      { returning: true }
+    );
+
+    res.json({ message: "Account Successfully Created!"});
+  },
   getUserInfo: async (req, res) => {
     try {
       const { id } = req.user;
