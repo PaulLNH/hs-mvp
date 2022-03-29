@@ -1,0 +1,19 @@
+{
+  "OPTIONS": {
+    "localhost": {
+      "dialect": "postgres",
+      "protocol": "postgres"
+    },
+    "production": {
+      "dialect": "postgres",
+      "protocol": "postgres",
+      "dialectOptions": {
+        "ssl": {
+          "require": true,
+          "rejectUnauthorized": false
+        }
+      }
+    }
+  },
+  "LOCALDATABASE_URL": "postgres://postgres:root@localhost:5432/hsmvp"
+}

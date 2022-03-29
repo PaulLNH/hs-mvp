@@ -1,6 +1,45 @@
+const { User } = require("../models");
+const { http } = require("../constants");
+
 const users = {
-  getAllUsers: (req, res) => {
-    res.json({ firstName: "Paul", lastName: "Laird", location: "Portsmouth" });
+  getAllUsers: async (req, res) => {
+    const users = await User.findAll({
+      attributes: { exclude: ["password"] },
+      raw: true,
+    });
+    const response = users.map((user) => ({ ...user, location: "Portsmouth" }));
+    res.json(response);
+  },
+  createUser: async (req, res) => {
+    const { email, password, first_name, last_name } = req.body;
+    const user = await User.create(
+      {
+        first_name,
+        last_name,
+        email,
+        password,
+      },
+      { returning: true }
+    );
+
+    res.json({ message: "Account Successfully Created!"});
+  },
+  getUserInfo: async (req, res) => {
+    try {
+      const { id } = req.user;
+      let response = {};
+      const user = await User.findOne({
+        where: { id },
+        attributes: ["first_name", "last_name", "email", "id"],
+        raw: true,
+      });
+      response = { ...user };
+      res.status(http.Success.code).json(response);
+    } catch (error) {
+      return res
+        .status(http.InternalServerError.code)
+        .json(http.InternalServerError);
+    }
   },
 };
 

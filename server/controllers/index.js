@@ -1,3 +1,4 @@
 const users = require("./users");
+const auth = require("./auth");
 
-module.exports = { users };
+module.exports = { users, auth };
